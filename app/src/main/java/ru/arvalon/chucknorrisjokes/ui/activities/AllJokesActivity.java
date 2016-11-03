@@ -1,29 +1,24 @@
 package ru.arvalon.chucknorrisjokes.ui.activities;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ru.arvalon.chucknorrisjokes.R;
-import ru.arvalon.chucknorrisjokes.mvp.model.Count;
-import ru.arvalon.chucknorrisjokes.mvp.model.Joke;
 import ru.arvalon.chucknorrisjokes.mvp.model.JokeList;
 import ru.arvalon.chucknorrisjokes.mvp.presenter.AllJokesPresenter;
 import ru.arvalon.chucknorrisjokes.mvp.views.AllJokesView;
-import ru.arvalon.chucknorrisjokes.rest.ChuckNorrisAPI;
-import ru.arvalon.chucknorrisjokes.rest.ChuckNorrisRestAPI;
 
 public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesView {
 
     @InjectPresenter
     AllJokesPresenter allJokesPresenter;
+
+    @BindView(R.id.jokesCount)TextView jokesCount;
 
     private int count;
 
@@ -32,50 +27,8 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_all_jokes);
-
-        ChuckNorrisAPI api= ChuckNorrisRestAPI.getChuckNorrisRestAPI();
-        Call<Count> call=api.GetJokesCount();
-        call.enqueue(new Callback<Count>() {
-            @Override
-            public void onResponse(Call<Count> call, Response<Count> response) {
-                count=response.body().getValue();
-
-                Log.d("happy","Count: "+response.body().getValue());
-
-                ChuckNorrisAPI api2= ChuckNorrisRestAPI.getChuckNorrisRestAPI();
-
-                Call<JokeList> call2=api2.GetAllJokes(count);
-                call2.enqueue(new Callback<JokeList>() {
-                    @Override
-                    public void onResponse(Call<JokeList> call, Response<JokeList> response) {
-                        Log.d("happy","Joke count in List: "+response.body().getValue().size());
-                        for(Joke joke: response.body().getValue()){
-                            //Log.d("happy",joke.getJoke());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<JokeList> call, Throwable t) {
-                        Log.d("happy",t.toString());
-                    }
-                });
-            }
-
-            @Override
-            public void onFailure(Call<Count> call, Throwable t) {
-                Log.d("happy",t.toString());
-            }
-        });
-    }
-
-    @Override
-    public void setJokeCount(Count count) {
-
-    }
-
-    @Override
-    public void setJokesList(List<Joke> jokes) {
-
+        ButterKnife.bind(this);
+        allJokesPresenter.getJokes();
     }
 
     @Override
@@ -85,7 +38,12 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
 
     @Override
     public void ShowError() {
+        jokesCount.setText("ГРОБ ГРОБ КЛОДБИЩЕ ПИДОР");
+    }
 
+    @Override
+    public void ShowJokes(JokeList jokeList) {
+        jokesCount.setText(String.valueOf(jokeList.getValue().size()));
     }
 
     @Override
