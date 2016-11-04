@@ -1,6 +1,8 @@
 package ru.arvalon.chucknorrisjokes.ui.activities;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -12,6 +14,7 @@ import ru.arvalon.chucknorrisjokes.R;
 import ru.arvalon.chucknorrisjokes.mvp.model.JokeList;
 import ru.arvalon.chucknorrisjokes.mvp.presenter.AllJokesPresenter;
 import ru.arvalon.chucknorrisjokes.mvp.views.AllJokesView;
+import ru.arvalon.chucknorrisjokes.ui.adapters.JokesAdapter;
 
 public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesView {
 
@@ -19,8 +22,9 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
     AllJokesPresenter allJokesPresenter;
 
     @BindView(R.id.jokesCount)TextView jokesCount;
+    @BindView(R.id.jokesRecyclerView)RecyclerView recyclerView;
 
-    private int count;
+    private JokesAdapter jokesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,6 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
         getSupportActionBar().hide();
         setContentView(R.layout.activity_all_jokes);
         ButterKnife.bind(this);
-        allJokesPresenter.getJokes();
     }
 
     @Override
@@ -44,10 +47,17 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
     @Override
     public void ShowJokes(JokeList jokeList) {
         jokesCount.setText(String.valueOf(jokeList.getValue().size()));
+
+        jokesAdapter=new JokesAdapter(jokeList);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(jokesAdapter);
+
     }
 
     @Override
     public void PickUpJoke() {
 
     }
+
 }

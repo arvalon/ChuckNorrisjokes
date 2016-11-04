@@ -23,7 +23,17 @@ public class AllJokesPresenter extends MvpPresenter<AllJokesView> {
 
     private int count;
 
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        getJokes();
+    }
+
     public void getJokes(){
+
+        //можно убрать
+        Log.d("happy","Presenter isInRestoreState: "+isInRestoreState(getViewState()));
+
         ChuckNorrisAPI api= ChuckNorrisRestAPI.getChuckNorrisRestAPI();
         Call<Count> call = api.GetJokesCount();
         call.enqueue(new Callback<Count>() {
@@ -36,6 +46,7 @@ public class AllJokesPresenter extends MvpPresenter<AllJokesView> {
                     @Override
                     public void onResponse(Call<JokeList> call, Response<JokeList> response) {
                         getViewState().ShowJokes(response.body());
+                        Log.d("happy","ЕБИЧЕСКИЙ ЗАПРОС УДОЛСЯ!");
                     }
 
                     @Override
@@ -53,5 +64,11 @@ public class AllJokesPresenter extends MvpPresenter<AllJokesView> {
     }
     public void showJokes(){
 
+    }
+
+    //не понимаю как использовать
+    @Override
+    public boolean isInRestoreState(AllJokesView view) {
+        return super.isInRestoreState(view);
     }
 }
