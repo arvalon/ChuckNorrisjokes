@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ru.arvalon.chucknorrisjokes.R;
 import ru.arvalon.chucknorrisjokes.mvp.model.Joke;
 import ru.arvalon.chucknorrisjokes.mvp.model.JokeList;
@@ -36,6 +38,7 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
     @BindView(R.id.jokesCount)TextView jokesCount;
     @BindView(R.id.jokesRecyclerView)RecyclerView recyclerView;
     @BindView(R.id.jokeLoadProgressBar)ProgressBar jokeLoadProgressBar;
+    //@BindView(R.id.refreshJokes)Button button;
 
     private JokesAdapter jokesAdapter;
 
@@ -57,6 +60,7 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
         jokeLoadProgressBar.setVisibility(View.GONE);
         jokesCount.setText("ГРОБ ГРОБ КЛОДБИЩЕ ПИДОР");
     }
+
 
     @Override
     public void ShowJokes(JokeList jokeList) {
@@ -91,17 +95,21 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
                     @Override
                     public void onLongClick(View view, int position) {
                         Toast.makeText(getApplicationContext(),
-                                "Ты что экран продовить хочешь?",
+                                "Ты что экран продавить хочешь?",
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
         ));
-
     }
 
     @Override
     public void PickUpJoke() {
 
+    }
+
+    @OnClick(R.id.refreshJokesButton)
+    void refreshJokes(){
+        allJokesPresenter.getJokes();
     }
 
 }

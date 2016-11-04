@@ -48,7 +48,7 @@ public class AllJokesPresenter extends MvpPresenter<AllJokesView> {
                     @Override
                     public void onResponse(Call<JokeList> call, Response<JokeList> response) {
                         getViewState().ShowJokes(response.body());
-                        Log.d("happy","ЕБИЧЕСКИЙ ЗАПРОС УДОЛСЯ!");
+                        Log.d("happy","Load data");
                     }
 
                     @Override
