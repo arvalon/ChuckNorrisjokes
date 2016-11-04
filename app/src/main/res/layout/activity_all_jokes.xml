@@ -29,6 +29,13 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        android:layout_marginTop="80dp"
+        android:id="@+id/jokeLoadProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/jokesRecyclerView"
         android:layout_width="match_parent"

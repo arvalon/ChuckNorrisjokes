@@ -31,6 +31,8 @@ public class AllJokesPresenter extends MvpPresenter<AllJokesView> {
 
     public void getJokes(){
 
+        getViewState().ShowProgress();
+
         //можно убрать
         Log.d("happy","Presenter isInRestoreState: "+isInRestoreState(getViewState()));
 

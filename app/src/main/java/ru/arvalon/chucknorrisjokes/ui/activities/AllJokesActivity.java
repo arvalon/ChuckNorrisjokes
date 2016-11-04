@@ -5,6 +5,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -28,6 +30,7 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
 
     @BindView(R.id.jokesCount)TextView jokesCount;
     @BindView(R.id.jokesRecyclerView)RecyclerView recyclerView;
+    @BindView(R.id.jokeLoadProgressBar)ProgressBar jokeLoadProgressBar;
 
     private JokesAdapter jokesAdapter;
 
@@ -41,16 +44,18 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
 
     @Override
     public void ShowProgress() {
-
+        jokeLoadProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void ShowError() {
+        jokeLoadProgressBar.setVisibility(View.GONE);
         jokesCount.setText("ГРОБ ГРОБ КЛОДБИЩЕ ПИДОР");
     }
 
     @Override
     public void ShowJokes(JokeList jokeList) {
+        jokeLoadProgressBar.setVisibility(View.GONE);
         jokesCount.setText(String.valueOf(jokeList.getValue().size()));
 
         Collections.sort(jokeList.getValue(),(joke1,joke2)->joke1.getId()-joke2.getId());
