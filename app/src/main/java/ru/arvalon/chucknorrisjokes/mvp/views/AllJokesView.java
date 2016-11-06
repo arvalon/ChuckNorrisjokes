@@ -1,11 +1,10 @@
 package ru.arvalon.chucknorrisjokes.mvp.views;
 
 import com.arellomobile.mvp.MvpView;
+import com.arellomobile.mvp.viewstate.strategy.SingleStateStrategy;
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
-import java.util.List;
-
-import ru.arvalon.chucknorrisjokes.mvp.model.Count;
-import ru.arvalon.chucknorrisjokes.mvp.model.Joke;
 import ru.arvalon.chucknorrisjokes.mvp.model.JokeList;
 
 /**
@@ -16,5 +15,6 @@ public interface AllJokesView extends MvpView {
     void ShowProgress();
     void ShowError();
     void ShowJokes(JokeList jokeList);
+    void RefreshJokes();
     void PickUpJoke();
 }

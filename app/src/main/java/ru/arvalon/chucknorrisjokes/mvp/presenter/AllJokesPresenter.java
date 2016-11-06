@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,9 +34,6 @@ public class AllJokesPresenter extends MvpPresenter<AllJokesView> {
     public void getJokes(){
 
         getViewState().ShowProgress();
-
-        //можно убрать
-        Log.d("happy","Presenter isInRestoreState: "+isInRestoreState(getViewState()));
 
         ChuckNorrisAPI api= ChuckNorrisRestAPI.getChuckNorrisRestAPI();
         Call<Count> call = api.GetJokesCount();
@@ -66,11 +65,5 @@ public class AllJokesPresenter extends MvpPresenter<AllJokesView> {
     }
     public void showJokes(){
 
-    }
-
-    //не понимаю как использовать
-    @Override
-    public boolean isInRestoreState(AllJokesView view) {
-        return super.isInRestoreState(view);
     }
 }
