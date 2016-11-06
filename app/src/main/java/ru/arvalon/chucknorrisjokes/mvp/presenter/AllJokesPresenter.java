@@ -29,6 +29,7 @@ public class AllJokesPresenter extends MvpPresenter<AllJokesView> {
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         getJokes();
+
     }
 
     public void getJokes(){
