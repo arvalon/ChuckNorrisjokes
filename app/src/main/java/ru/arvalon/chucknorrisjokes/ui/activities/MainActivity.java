@@ -45,5 +45,4 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
     public void ShowCustomJoke() {
 
     }
-
 }
