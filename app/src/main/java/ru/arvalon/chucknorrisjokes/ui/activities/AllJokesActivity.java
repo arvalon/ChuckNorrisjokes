@@ -108,7 +108,6 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
         }
     }
 
-    @Override
     @OnClick(R.id.refreshJokesButton)
     public void RefreshJokes() {
 
