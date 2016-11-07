@@ -9,6 +9,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ru.arvalon.chucknorrisjokes.R;
 import ru.arvalon.chucknorrisjokes.mvp.presenter.MainActivityPresenter;
 import ru.arvalon.chucknorrisjokes.mvp.views.MainActivityView;
@@ -37,8 +38,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
     }
 
     @Override
+    @OnClick(R.id.randomJokeButton)
     public void ShowRandomJoke() {
-
+        startActivity(new Intent(this,JokeActivity.class));
     }
 
     @Override

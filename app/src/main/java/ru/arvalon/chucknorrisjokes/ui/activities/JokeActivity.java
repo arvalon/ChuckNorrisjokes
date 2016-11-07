@@ -6,11 +6,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.arvalon.chucknorrisjokes.R;
+import ru.arvalon.chucknorrisjokes.mvp.presenter.JokePresenter;
+import ru.arvalon.chucknorrisjokes.mvp.presenter.JokePresenterImpl;
+import ru.arvalon.chucknorrisjokes.mvp.views.JokeView;
 
-public class JokeActivity extends AppCompatActivity {
+public class JokeActivity extends MvpAppCompatActivity implements JokeView {
+
+    private static final String joke = "joke";
+
+    @InjectPresenter
+    JokePresenterImpl myJokePresenter;
 
     @BindView(R.id.jokeText)TextView textView;
 
@@ -21,9 +32,35 @@ public class JokeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent=getIntent();
-        String joke=intent.getStringExtra("joke");
+        Log.d("happy","JokeActivity onCreate");
+        if(intent.hasExtra(joke)){
+                Log.d("happy","intent.hasExtra(joke)");
+                if (intent.getStringExtra(joke).length()!=0){
+                    Log.d("happy","intent.getStringExtra(joke).length()!=0");
+                    setJoke(intent.getStringExtra(joke));
+                    myJokePresenter.isJokeSet=true;
+                }
+        }myJokePresenter.getRundomJoke();
+    }
 
-        textView.setText(joke);
+    @Override
+    public void setJoke(String jokeText) {
+        textView.setText(jokeText);
+        Log.d("happy","JokeActivity setJoke");
+    }
+
+    @Override
+    public void showError() {
+        textView.setText("ERROR");
+    }
+
+    @Override
+    public void showProgress() {
+        textView.setText("wait...");
+    }
+
+    @Override
+    public void PostJoke() {
 
     }
 }
