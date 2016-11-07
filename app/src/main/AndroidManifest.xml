@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.AllJokesActivity" />
-        <activity android:name=".ui.activities.JokeActivity"></activity>
+        <activity android:name=".ui.activities.JokeActivity" />
+        <activity android:name=".ui.activities.UserNameActivity"></activity>
     </application>
 
 </manifest>

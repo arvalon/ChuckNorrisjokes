@@ -5,6 +5,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import ru.arvalon.chucknorrisjokes.mvp.model.Count;
 import ru.arvalon.chucknorrisjokes.mvp.model.Joke;
 import ru.arvalon.chucknorrisjokes.mvp.model.JokeList;
@@ -31,4 +32,8 @@ public interface ChuckNorrisAPI {
     @GET("categories")
     Call<List<String>>GetJokeCategories();
 
+    @GET("random")
+    Call<JokeWrapper>GetPersonajJoke(
+            @Query("firstName") String firstName,
+            @Query("lastName") String lastName);
 }

@@ -44,7 +44,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
     }
 
     @Override
+    @OnClick(R.id.customJokeButton)
     public void ShowCustomJoke() {
-
+        startActivity(new Intent(this,UserNameActivity.class));
     }
 }
