@@ -23,6 +23,7 @@ import ru.arvalon.chucknorrisjokes.rest.ChuckNorrisRestAPI;
 public class JokePresenterImpl extends MvpPresenter<JokeView> implements JokePresenter{
 
     public boolean isJokeSet;
+    public boolean randomViewMode;
 
     @Override
     public void postJoke(String jokeText) {
@@ -47,8 +48,10 @@ public class JokePresenterImpl extends MvpPresenter<JokeView> implements JokePre
                     getViewState().showError();
                 }
             });
+            randomViewMode=true;
         }
         isJokeSet=true;
+
     }
 
     @Override

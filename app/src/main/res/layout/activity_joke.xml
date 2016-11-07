@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,11 +9,21 @@
     tools:context="ru.arvalon.chucknorrisjokes.ui.activities.JokeActivity">
 
     <ImageView
+        android:id="@+id/ChuckNorrisWideLogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/chuck_norris_logo"/>
     <TextView
         android:id="@+id/jokeText"
+        android:layout_below="@id/ChuckNorrisWideLogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-</LinearLayout>
+
+    <ProgressBar
+        android:layout_below="@id/ChuckNorrisWideLogo"
+        android:id="@+id/jokeLoadProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+</RelativeLayout>
