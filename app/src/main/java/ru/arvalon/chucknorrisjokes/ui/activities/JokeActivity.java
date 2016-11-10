@@ -1,13 +1,11 @@
 package ru.arvalon.chucknorrisjokes.ui.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,20 +22,14 @@ import com.vk.sdk.api.VKError;
 import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
-import com.vk.sdk.api.model.VKApiDialog;
-import com.vk.sdk.api.model.VKApiGetDialogResponse;
-import com.vk.sdk.api.model.VKList;
 import com.vk.sdk.api.model.VKWallPostResult;
 
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.arvalon.chucknorrisjokes.R;
-import ru.arvalon.chucknorrisjokes.mvp.presenter.JokePresenter;
 import ru.arvalon.chucknorrisjokes.mvp.presenter.JokePresenterImpl;
 import ru.arvalon.chucknorrisjokes.mvp.views.JokeView;
 
@@ -48,7 +40,6 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView {
     private static final String joke = "joke";
 
     private String[] scope=new String[]{VKScope.WALL};
-    private int VkUserID;
 
     @InjectPresenter
     JokePresenterImpl myJokePresenter;
@@ -75,11 +66,11 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView {
                     myJokePresenter.randomViewMode=false;
                 }
         }myJokePresenter.getRundomJoke();
+    }
 
+    @Override
+    public void vkLogin() {
         VKSdk.login(this,scope);
-
-        //getVkUserInfo();
-
     }
 
     @Override
@@ -105,22 +96,23 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView {
     public void PostJoke() {
         Toast.makeText(this,"Post to VK",Toast.LENGTH_SHORT).show();
 
+
+
         VKApi.users().get().executeWithListener(new VKRequest.VKRequestListener() {
             @Override
             public void onComplete(VKResponse response) {
                 try{
                     JSONObject r=response.json.getJSONArray("response").getJSONObject(0);
 
-                    Log.d("happy","УРА! Мои данные Вконтакте!");
-                    Log.d("happy",r.toString());
+                    Log.d("happy","УРА! Мои данные Вконтакте: "+r.toString());
 
                     VKParameters parameters = new VKParameters();
-                    //my id 39223649
                     parameters.put(VKApiConst.OWNER_ID, r.getInt("id"));
                     parameters.put(VKApiConst.MESSAGE, textView.getText().toString());
                     VKRequest post = VKApi.wall().post(parameters);
                     Log.d("happy","Joke to post: "+textView.getText().toString());
                     post.setModelClass(VKWallPostResult.class);
+
                     post.executeWithListener(new VKRequest.VKRequestListener() {
                         @Override
                         public void onComplete(VKResponse response) {
@@ -166,13 +158,14 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView {
             public void onResult(VKAccessToken res) {
 
                 Toast.makeText(getApplicationContext(),"Good",Toast.LENGTH_LONG).show();
-                Log.d("happy","TOKEN: "+res.accessToken);
-                Log.d("happy","TOKEN expiresIn: "+res.expiresIn);
+                Log.d("happy","onActivityResult TOKEN: "+res.accessToken+", TOKEN expiresIn: "+res.expiresIn);
 
             }
             @Override
             public void onError(VKError error) {
-                Toast.makeText(getApplicationContext(),"ERROR",Toast.LENGTH_LONG).show();
+
+                Toast.makeText(getApplicationContext(),"onActivityResult ERROR",Toast.LENGTH_LONG).show();
+                Log.d("happy","onActivityResult error");
             }
         })) {
             super.onActivityResult(requestCode, resultCode, data);

@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.vk.sdk.VKScope;
+import com.vk.sdk.VKSdk;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +26,12 @@ public class JokePresenterImpl extends MvpPresenter<JokeView> implements JokePre
 
     public boolean isJokeSet;
     public boolean randomViewMode;
+
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        getViewState().vkLogin();
+    }
 
     @Override
     public void postJoke(String jokeText) {

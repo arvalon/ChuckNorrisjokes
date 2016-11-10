@@ -44,25 +44,30 @@ public class VkApplication extends Application {
 
         @Override
         public void onVKAccessTokenChanged(VKAccessToken oldToken, VKAccessToken newToken) {
-            Log.d("happy","OLD TOKEN: "+oldToken.accessToken);
-            Log.d("happy","OLD TOKEN email: "+oldToken.email
-                    +", OLD TOKEN secret: "+oldToken.secret
-                    +", OLD TOKEN userId: "+oldToken.userId
-                    +", OLD TOKEN created: "+oldToken.created
-                    +", OLD TOKEN isExpired: "+oldToken.isExpired()
-                    +", OLD TOKEN expiresIn: "+oldToken.expiresIn);
 
-            Log.d("happy","OLD TOKEN: "+newToken.accessToken);
-            Log.d("happy","OLD TOKEN email: "+newToken.email
-                    +", OLD TOKEN secret: "+newToken.secret
-                    +", OLD TOKEN userId: "+newToken.userId
-                    +", OLD TOKEN created: "+newToken.created
-                    +", OLD TOKEN isExpired: "+newToken.isExpired()
-                    +", OLD TOKEN expiresIn: "+newToken.expiresIn);
+            TokenLog(oldToken,newToken);
 
             if (newToken==null){
                 Log.d("happy","New token is null, VKAccessToken is invalid");
             }else Log.d("happy","VKAccessToken is valid");
         }
     };
+
+    private void TokenLog(VKAccessToken oldToken, VKAccessToken newToken){
+
+        if (oldToken!=null) TokenLogcat(oldToken);
+
+        if (newToken!=null) TokenLogcat(newToken);
+    }
+
+    private void TokenLogcat(VKAccessToken Token){
+
+        Log.d("happy"," TOKEN: "+Token.accessToken);
+        Log.d("happy"," TOKEN email: "+Token.email
+                +", TOKEN secret: "+Token.secret
+                +", TOKEN userId: "+Token.userId
+                +", TOKEN created: "+Token.created
+                +", TOKEN isExpired: "+Token.isExpired()
+                +", TOKEN expiresIn: "+Token.expiresIn);
+    }
 }
