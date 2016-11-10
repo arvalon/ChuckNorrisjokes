@@ -2,10 +2,14 @@ package ru.arvalon.chucknorrisjokes.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.vk.sdk.util.VKUtil;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +32,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
         ButterKnife.bind(this);
 
         allJokes.setOnClickListener(view->ShowAllJokes());
+
+        String[] fingerprints = VKUtil.getCertificateFingerprint(this, this.getPackageName());
+        Log.d("happy", Arrays.asList(fingerprints).toString());
 
     }
 

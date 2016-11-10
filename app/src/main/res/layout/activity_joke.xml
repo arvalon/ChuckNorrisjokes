@@ -20,10 +20,18 @@
         android:layout_height="wrap_content"/>
 
     <ProgressBar
-        android:layout_below="@id/ChuckNorrisWideLogo"
+        android:layout_centerInParent="true"
+        style="?android:attr/progressBarStyleLarge"
         android:id="@+id/jokeLoadProgressBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/postToVkButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/jokeText"
+        android:text="На мою стену вконтакте" />
 
 </RelativeLayout>
