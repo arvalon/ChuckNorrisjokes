@@ -24,8 +24,6 @@ import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 import com.vk.sdk.api.model.VKWallPostResult;
 
-import org.json.JSONObject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -33,11 +31,11 @@ import ru.arvalon.chucknorrisjokes.R;
 import ru.arvalon.chucknorrisjokes.mvp.presenter.JokePresenterImpl;
 import ru.arvalon.chucknorrisjokes.mvp.views.JokeView;
 
-import static android.R.attr.id;
 
 public class JokeActivity extends MvpAppCompatActivity implements JokeView {
 
     private static final String joke = "joke";
+    private static final String VK_ACCESS_TOKEN = "VK_ACCESS_TOKEN";
 
     private String[] scope=new String[]{VKScope.WALL};
 
@@ -69,8 +67,9 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView {
     }
 
     @Override
-    public void vkLogin() {
+    public void vkAuthorize() {
         VKSdk.login(this,scope);
+
     }
 
     @Override
@@ -93,79 +92,52 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView {
 
     @Override
     @OnClick(R.id.postToVkButton)
-    public void PostJoke() {
-        Toast.makeText(this,"Post to VK",Toast.LENGTH_SHORT).show();
+    public void PostButton() {
+        if (VKAccessToken.tokenFromSharedPreferences(this,VK_ACCESS_TOKEN)==null){
+            Log.d("happy","Token from shared == null");
+            vkAuthorize();
+            //PostJoke(VKAccessToken.tokenFromSharedPreferences(this,VK_ACCESS_TOKEN));
+            // TODO: 12.11.2016 call PostJoke with token
+        }else if(VKAccessToken.tokenFromSharedPreferences(this,VK_ACCESS_TOKEN)!=null){
+            Log.d("happy","Token from shared != null");
+            PostJoke(VKAccessToken.tokenFromSharedPreferences(this,VK_ACCESS_TOKEN));
+        }
 
+    }
 
-
-        VKApi.users().get().executeWithListener(new VKRequest.VKRequestListener() {
+    private void PostJoke(VKAccessToken token) {
+        VKParameters parameters = new VKParameters();
+        parameters.put(VKApiConst.OWNER_ID, token.userId);
+        parameters.put(VKApiConst.MESSAGE, textView.getText().toString());
+        VKRequest post = VKApi.wall().post(parameters);
+        Log.d("happy","Joke to post: "+textView.getText().toString());
+        post.setModelClass(VKWallPostResult.class);
+        post.executeWithListener(new VKRequest.VKRequestListener() {
             @Override
             public void onComplete(VKResponse response) {
-                try{
-                    JSONObject r=response.json.getJSONArray("response").getJSONObject(0);
-
-                    Log.d("happy","УРА! Мои данные Вконтакте: "+r.toString());
-
-                    VKParameters parameters = new VKParameters();
-                    parameters.put(VKApiConst.OWNER_ID, r.getInt("id"));
-                    parameters.put(VKApiConst.MESSAGE, textView.getText().toString());
-                    VKRequest post = VKApi.wall().post(parameters);
-                    Log.d("happy","Joke to post: "+textView.getText().toString());
-                    post.setModelClass(VKWallPostResult.class);
-
-                    post.executeWithListener(new VKRequest.VKRequestListener() {
-                        @Override
-                        public void onComplete(VKResponse response) {
-                            Toast.makeText(getApplicationContext(),"post wall was added",Toast.LENGTH_LONG).show();
-                            Log.d("happy","response: "+response.toString());
-                            //
-                        }
-                        @Override
-                        public void onError(VKError error) {
-                            Toast.makeText(getApplicationContext(),"post wall error",Toast.LENGTH_LONG).show();
-
-                        }
-                    });
-
-                }catch (Exception e){
-                    Log.d("happy","VKApi.users().get() onComplete catch (Exception e)");
-                    Log.d("happy",e.toString());
-                }
+                Toast.makeText(getApplicationContext(),"Шутка добавлена",Toast.LENGTH_LONG).show();
+                Log.d("happy","response: "+response.toString());
             }
-
-            @Override
-            public void attemptFailed(VKRequest request, int attemptNumber, int totalAttempts) {
-                super.attemptFailed(request, attemptNumber, totalAttempts);
-            }
-
             @Override
             public void onError(VKError error) {
-                super.onError(error);
-            }
-
-            @Override
-            public void onProgress(VKRequest.VKProgressType progressType, long bytesLoaded, long bytesTotal) {
-                super.onProgress(progressType, bytesLoaded, bytesTotal);
+                Toast.makeText(getApplicationContext(),"Ошибка авторизации",Toast.LENGTH_LONG).show();
+                vkAuthorize();
             }
         });
-
-
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
-
-                Toast.makeText(getApplicationContext(),"Good",Toast.LENGTH_LONG).show();
-                Log.d("happy","onActivityResult TOKEN: "+res.accessToken+", TOKEN expiresIn: "+res.expiresIn);
-
+                Log.d("happy","Получили токен onActivityResult TOKEN: "+res.accessToken+", TOKEN expiresIn: "+res.expiresIn);
+                res.saveTokenToSharedPreferences(getApplicationContext(),VK_ACCESS_TOKEN);
+                PostJoke(res);
             }
             @Override
             public void onError(VKError error) {
 
-                Toast.makeText(getApplicationContext(),"onActivityResult ERROR",Toast.LENGTH_LONG).show();
-                Log.d("happy","onActivityResult error");
+                Log.d("happy","onActivityResult error не смогли получить токен");
             }
         })) {
             super.onActivityResult(requestCode, resultCode, data);

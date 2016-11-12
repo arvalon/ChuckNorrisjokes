@@ -9,10 +9,9 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
  */
 
 public interface JokeView extends MvpView {
-    @StateStrategyType(SkipStrategy.class)
-    void vkLogin();
+    void vkAuthorize();
     void setJoke(String jokeText);
     void showError();
     void showProgress();
-    void PostJoke();
+    void PostButton();
 }

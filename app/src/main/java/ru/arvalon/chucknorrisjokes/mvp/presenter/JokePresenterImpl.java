@@ -28,12 +28,6 @@ public class JokePresenterImpl extends MvpPresenter<JokeView> implements JokePre
     public boolean randomViewMode;
 
     @Override
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
-        getViewState().vkLogin();
-    }
-
-    @Override
     public void postJoke(String jokeText) {
 
     }

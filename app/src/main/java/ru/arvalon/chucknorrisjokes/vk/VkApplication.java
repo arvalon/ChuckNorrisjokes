@@ -26,15 +26,18 @@ public class VkApplication extends Application {
 
     private VKAccessToken access_token;
 
+    private String[] scope=new String[]{VKScope.WALL};
+
 
     @Override
     public void onCreate() {
 
         //access_token = VKAccessToken.tokenFromSharedPreferences(this, VK_ACCESS_TOKEN);
-
-        VKSdk.initialize(this);
+        Log.d("happy","VkApplication - onCreate");
 
         vkAccessTokenTracker.startTracking();
+
+        VKSdk.initialize(this);
 
         //access_token.saveTokenToSharedPreferences(this,VK_ACCESS_TOKEN);
 
@@ -44,23 +47,33 @@ public class VkApplication extends Application {
 
         @Override
         public void onVKAccessTokenChanged(VKAccessToken oldToken, VKAccessToken newToken) {
+            Log.d("happy","onVKAccessTokenChanged");
 
             TokenLog(oldToken,newToken);
 
             if (newToken==null){
                 Log.d("happy","New token is null, VKAccessToken is invalid");
             }else Log.d("happy","VKAccessToken is valid");
+
         }
+
+
     };
 
     private void TokenLog(VKAccessToken oldToken, VKAccessToken newToken){
 
-        if (oldToken!=null) TokenLogcat(oldToken);
+        if (oldToken!=null) {
+            Log.d("happy","Old Token");
+            TokenLogcat(oldToken);
+        }
 
-        if (newToken!=null) TokenLogcat(newToken);
+        if (newToken!=null) {
+            Log.d("happy","New Token");
+            TokenLogcat(newToken);
+        }
     }
 
-    private void TokenLogcat(VKAccessToken Token){
+    public void TokenLogcat(VKAccessToken Token){
 
         Log.d("happy"," TOKEN: "+Token.accessToken);
         Log.d("happy"," TOKEN email: "+Token.email
