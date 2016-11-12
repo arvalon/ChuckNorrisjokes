@@ -15,6 +15,7 @@ public interface UserNameView extends MvpView {
     void setLastnameError();
     void showProgress();
     void showConnectionError();
-    void setUserName(String firsName, String lastName);
+    void setUserName();
+    void saveUserName(String firstName, String lastName);
     void showJoke(String jokeText);
 }

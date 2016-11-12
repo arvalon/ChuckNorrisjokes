@@ -1,6 +1,7 @@
 package ru.arvalon.chucknorrisjokes.mvp.presenter;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -20,6 +21,11 @@ import ru.arvalon.chucknorrisjokes.ui.activities.JokeActivity;
 
 @InjectViewState
 public class UserNamePresenterImpl extends MvpPresenter<UserNameView> implements UserNamePresenter {
+
+    @Override
+    protected void onFirstViewAttach() {
+        getViewState().setUserName();
+    }
 
     @Override
     public void getCustomJoke(String firsName, String lastName) {
@@ -54,7 +60,7 @@ public class UserNamePresenterImpl extends MvpPresenter<UserNameView> implements
 
     @Override
     public void saveUserName(String firsName, String lastName) {
-
+        getViewState().saveUserName(firsName,lastName);
     }
 
     @Override

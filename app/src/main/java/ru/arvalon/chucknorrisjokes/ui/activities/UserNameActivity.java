@@ -1,6 +1,7 @@
 package ru.arvalon.chucknorrisjokes.ui.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,14 +31,20 @@ public class UserNameActivity extends MvpAppCompatActivity implements UserNameVi
     @InjectPresenter
     UserNamePresenterImpl userNamePresenter;
 
-    private static String emptyFieldErrorString="Поле не может быть пустое";
-    private static String JOKE="joke";
+    private static final String emptyFieldErrorString="Поле не может быть пустое";
+    private static final String JOKE="joke";
+
+    private static final String sharedFirstName="sharedFirstName";
+    private static final String sharedLastName="sharedLastName";
+
+    SharedPreferences sPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_name);
         ButterKnife.bind(this);
+        sPrefs=getPreferences(getApplicationContext().MODE_PRIVATE);
     }
 
     @Override
@@ -69,8 +76,24 @@ public class UserNameActivity extends MvpAppCompatActivity implements UserNameVi
     }
 
     @Override
-    public void setUserName(String firsName, String lastName) {
+    public void setUserName() {
+        if(sPrefs.contains(sharedFirstName)&&sPrefs.contains(sharedLastName)){
+            Log.d("happy","Get from SharedPreferences firsnname: "
+                    +sPrefs.getString(sharedFirstName,"")
+                    +", lastname: "
+                    +sPrefs.getString(sharedLastName,""));
+            this.firstName.setText(sPrefs.getString(sharedFirstName,""));
+            this.lastName.setText(sPrefs.getString(sharedLastName,""));
+        }
+    }
 
+    @Override
+    public void saveUserName(String firstName, String lastName) {
+
+        SharedPreferences.Editor editor=sPrefs.edit();
+        editor.putString(sharedFirstName,firstName);
+        editor.putString(sharedLastName,lastName);
+        editor.apply();
     }
 
     @Override
