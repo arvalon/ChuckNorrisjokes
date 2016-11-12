@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChuckNorrisjokes</string>
+    <string name="app_name">Шутки о Чаке Норрисе</string>
     <string name="title_activity_user_name">UserNameActivity</string>
     <integer name="com_vk_sdk_AppId">5721009</integer>
 </resources>
