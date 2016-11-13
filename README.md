@@ -1,9 +1,9 @@
 # ChuckNorrisjokes
-Пост шуток про Чака Норриса себе на стену во вконтакте
-Используемые библиотеки и технологии:
-Moxy MVP
-ButterKnife
-Retrolambda
-Retrofit2
-RecyclerView
-Vkontakte SDK
+Пост шуток про Чака Норриса себе на стену во вконтакте<br>
+Используемые библиотеки и технологии:<br>
+Moxy MVP<br>
+ButterKnife<br>
+Retrolambda<br>
+Retrofit2<br>
+RecyclerView<br>
+Vkontakte SDK<br>
