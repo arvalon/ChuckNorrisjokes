@@ -6,4 +6,5 @@ ButterKnife<br>
 Retrolambda<br>
 Retrofit2<br>
 RecyclerView<br>
-Vkontakte SDK<br>
+Vkontakte SDK<br><br>
+Данные взяты из http://www.icndb.com/api/
