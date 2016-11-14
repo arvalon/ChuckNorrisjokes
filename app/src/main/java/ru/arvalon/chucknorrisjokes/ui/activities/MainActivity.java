@@ -33,9 +33,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
 
         allJokes.setOnClickListener(view->ShowAllJokes());
 
-        //String[] fingerprints = VKUtil.getCertificateFingerprint(this, this.getPackageName());
-        //Log.d("happy", Arrays.asList(fingerprints).toString());
-
     }
 
     @Override

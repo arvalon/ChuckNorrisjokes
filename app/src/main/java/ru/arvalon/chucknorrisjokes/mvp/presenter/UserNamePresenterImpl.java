@@ -29,13 +29,14 @@ public class UserNamePresenterImpl extends MvpPresenter<UserNameView> implements
 
     @Override
     public void getCustomJoke(String firsName, String lastName) {
-        // TODO: 07.11.2016 retrofit is else view.showJoke (start new activity) or showConnection Erorr
         getViewState().showProgress();
         ChuckNorrisAPI api= ChuckNorrisRestAPI.getChuckNorrisRestAPI();
         Call<JokeWrapper>call=api.GetPersonajJoke(firsName,lastName);
         call.enqueue(new Callback<JokeWrapper>() {
             @Override
             public void onResponse(Call<JokeWrapper> call, Response<JokeWrapper> response) {
+                response.body().getValue().setJoke(
+                        response.body().getValue().getJoke().replaceAll("&quot;","\""));
                 getViewState().showJoke(response.body().getValue().getJoke());
             }
 

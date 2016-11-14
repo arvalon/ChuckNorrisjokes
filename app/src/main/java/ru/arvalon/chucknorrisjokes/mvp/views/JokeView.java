@@ -14,4 +14,5 @@ public interface JokeView extends MvpView {
     void showError();
     void showProgress();
     void PostButton();
+    void ShowFinalDialog();
 }

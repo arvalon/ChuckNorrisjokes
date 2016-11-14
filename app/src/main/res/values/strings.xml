@@ -2,4 +2,8 @@
     <string name="app_name">Шутки о Чаке Норрисе</string>
     <string name="title_activity_user_name">UserNameActivity</string>
     <integer name="com_vk_sdk_AppId">5721009</integer>
+    <string name="JokePostSuccessDialogTitle">Шутка добавлена!</string>
+    <string name="JokePostSuccessDialogMessage">Выйти из приложения или перейти в главное меню</string>
+    <string name="JokePostSuccessDialogNegativeButton">Главное меню</string>
+    <string name="JokePostSuccessDialogPositiveButton">Выйти из программы</string>
 </resources>

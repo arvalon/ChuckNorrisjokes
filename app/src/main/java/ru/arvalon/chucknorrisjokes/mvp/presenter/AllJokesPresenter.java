@@ -4,8 +4,6 @@ import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,8 +45,14 @@ public class AllJokesPresenter extends MvpPresenter<AllJokesView> {
                 call2.enqueue(new Callback<JokeList>() {
                     @Override
                     public void onResponse(Call<JokeList> call, Response<JokeList> response) {
+
+                        for(int i=0;i<response.body().getValue().size();i++){
+                            response.body().getValue().get(i).setJoke(
+                                    response.body().getValue().get(i).getJoke().replaceAll("&quot;","\""));
+                        }
+
                         getViewState().ShowJokes(response.body());
-                        Log.d("happy","Load data");
+                        Log.d("happy","onResponse end");
                     }
 
                     @Override

@@ -3,6 +3,14 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'android-apt'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'ChuckNorrisJokesKey'
+            keyPassword 'wsxedc^234'
+            storeFile file('D:/AndroidStudioProjects/_APKkeys/ChuckNorrisjokes/ChuckNorrisJokesKeyStore.jks')
+            storePassword 'qazwsx^34'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
@@ -12,6 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
@@ -22,6 +31,8 @@ android {
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
+    }
+    productFlavors {
     }
 }
 

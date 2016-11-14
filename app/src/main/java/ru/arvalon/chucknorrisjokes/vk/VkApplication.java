@@ -22,18 +22,18 @@ import org.json.JSONObject;
 
 public class VkApplication extends Application {
 
-    public static final String VK_ACCESS_TOKEN = "VK_ACCESS_TOKEN";
+    //public static final String VK_ACCESS_TOKEN = "VK_ACCESS_TOKEN";
 
-    private VKAccessToken access_token;
+    //private VKAccessToken access_token;
 
-    private String[] scope=new String[]{VKScope.WALL};
+    //private String[] scope=new String[]{VKScope.WALL};
 
 
     @Override
     public void onCreate() {
 
         //access_token = VKAccessToken.tokenFromSharedPreferences(this, VK_ACCESS_TOKEN);
-        Log.d("happy","VkApplication - onCreate");
+        //Log.d("happy","VkApplication - onCreate");
 
         vkAccessTokenTracker.startTracking();
 

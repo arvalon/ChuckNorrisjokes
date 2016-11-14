@@ -42,6 +42,8 @@ public class JokePresenterImpl extends MvpPresenter<JokeView> implements JokePre
             call.enqueue(new Callback<JokeWrapper>() {
                 @Override
                 public void onResponse(Call<JokeWrapper> call, Response<JokeWrapper> response) {
+                    response.body().getValue().setJoke(
+                            response.body().getValue().getJoke().replaceAll("&quot;","\""));
                     getViewState().setJoke(response.body().getValue().getJoke());
                 }
 
@@ -53,7 +55,6 @@ public class JokePresenterImpl extends MvpPresenter<JokeView> implements JokePre
             randomViewMode=true;
         }
         isJokeSet=true;
-
     }
 
     @Override

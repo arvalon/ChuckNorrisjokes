@@ -1,7 +1,9 @@
 package ru.arvalon.chucknorrisjokes.ui.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,9 +32,10 @@ import butterknife.OnClick;
 import ru.arvalon.chucknorrisjokes.R;
 import ru.arvalon.chucknorrisjokes.mvp.presenter.JokePresenterImpl;
 import ru.arvalon.chucknorrisjokes.mvp.views.JokeView;
+import ru.arvalon.chucknorrisjokes.ui.dialogs.JokePostSuccessDialog;
 
 
-public class JokeActivity extends MvpAppCompatActivity implements JokeView {
+public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokePostSuccessDialog.DialogHost {
 
     private static final String joke = "joke";
     private static final String VK_ACCESS_TOKEN = "VK_ACCESS_TOKEN";
@@ -117,6 +120,7 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView {
             public void onComplete(VKResponse response) {
                 Toast.makeText(getApplicationContext(),"Шутка добавлена",Toast.LENGTH_LONG).show();
                 Log.d("happy","response: "+response.toString());
+                ShowFinalDialog();
             }
             @Override
             public void onError(VKError error) {
@@ -164,4 +168,20 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView {
         return true;
     }
 
+    @Override
+    public void ShowFinalDialog() {
+        JokePostSuccessDialog dialog=new JokePostSuccessDialog();
+        dialog.show(getSupportFragmentManager(),"QWERTY");
+    }
+
+    @Override
+    public void DialogExitFromApplication() {
+        this.finishAffinity();
+    }
+
+    @Override
+    public void DialogGotoMainMenu() {
+        Log.d("happy","NegativeButton");
+        startActivity(new Intent(this,MainActivity.class));
+    }
 }

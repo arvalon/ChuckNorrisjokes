@@ -14,6 +14,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/chuck_norris_logo"/>
     <TextView
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
         android:id="@+id/jokeText"
         android:layout_below="@id/ChuckNorrisWideLogo"
         android:layout_width="match_parent"
