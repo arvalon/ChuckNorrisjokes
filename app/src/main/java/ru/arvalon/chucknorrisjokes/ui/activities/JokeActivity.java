@@ -66,7 +66,8 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokeP
                     myJokePresenter.isJokeSet=true;
                     myJokePresenter.randomViewMode=false;
                 }
-        }myJokePresenter.getRundomJoke();
+        }
+        myJokePresenter.getRundomJoke();
     }
 
     @Override
