@@ -7,9 +7,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +27,7 @@ import ru.arvalon.chucknorrisjokes.mvp.presenter.AllJokesPresenter;
 import ru.arvalon.chucknorrisjokes.mvp.views.AllJokesView;
 import ru.arvalon.chucknorrisjokes.ui.adapters.JokesAdapter;
 import ru.arvalon.chucknorrisjokes.ui.listeners.RecyclerTouchListener;
+import ru.arvalon.chucknorrisjokes.vk.App;
 
 public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesView {
 
@@ -87,7 +86,7 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
                     new RecyclerTouchListener.ClickListener() {
                         @Override
                         public void onClick(View view, int position) {
-                            Log.d("happy","new RecyclerTouchListener.ClickListener() onClick");
+                            Log.d(App.TAG,"new RecyclerTouchListener.ClickListener() onClick");
                             Joke joke=jokeList.getValue().get(position);
                             Intent intent=new Intent(getApplicationContext(),JokeActivity.class);
                             intent.putExtra("joke",joke.getJoke());
@@ -103,7 +102,7 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
                     }
             ));
 
-            Log.d("happy","Listener is created");
+            Log.d(App.TAG,"Listener is created");
             isListenerCreated=true;
         }
     }
@@ -112,7 +111,7 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
     public void RefreshJokes() {
 
         allJokesPresenter.getJokes();
-        Log.d("happy","@OnClick(R.id.refreshJokesButton)");
+        Log.d(App.TAG,"@OnClick(R.id.refreshJokesButton)");
     }
 
     @Override

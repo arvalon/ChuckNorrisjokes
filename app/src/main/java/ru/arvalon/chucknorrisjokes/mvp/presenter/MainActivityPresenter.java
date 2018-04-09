@@ -6,6 +6,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
 import ru.arvalon.chucknorrisjokes.mvp.views.MainActivityView;
+import ru.arvalon.chucknorrisjokes.vk.App;
 
 
 /**
@@ -15,10 +16,10 @@ import ru.arvalon.chucknorrisjokes.mvp.views.MainActivityView;
 @InjectViewState
 public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
     public MainActivityPresenter() {
-        Log.d("happy","MainActivityPresenter Constructor");
+        Log.d(App.TAG,"MainActivityPresenter Constructor");
     }
 
     public void AllJokes(){
-        Log.d("happy","MainActivityPresenter-AllJokes");
+        Log.d(App.TAG,"MainActivityPresenter-AllJokes");
     }
 }
