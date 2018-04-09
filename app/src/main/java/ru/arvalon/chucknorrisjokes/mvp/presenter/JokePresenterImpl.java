@@ -1,21 +1,18 @@
 package ru.arvalon.chucknorrisjokes.mvp.presenter;
 
-import android.content.Intent;
 import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.vk.sdk.VKScope;
-import com.vk.sdk.VKSdk;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import ru.arvalon.chucknorrisjokes.mvp.model.Joke;
 import ru.arvalon.chucknorrisjokes.mvp.model.JokeWrapper;
 import ru.arvalon.chucknorrisjokes.mvp.views.JokeView;
 import ru.arvalon.chucknorrisjokes.rest.ChuckNorrisAPI;
 import ru.arvalon.chucknorrisjokes.rest.ChuckNorrisRestAPI;
+import ru.arvalon.chucknorrisjokes.vk.App;
 
 /**
  * Created by arvalon on 06.11.2016.
@@ -35,7 +32,7 @@ public class JokePresenterImpl extends MvpPresenter<JokeView> implements JokePre
     @Override
     public void getRundomJoke() {
         if (!isJokeSet){
-            Log.d("happy","JokePresenterImpl getRundomJoke()");
+            Log.d(App.TAG,"JokePresenterImpl getRundomJoke()");
             getViewState().showProgress();
             ChuckNorrisAPI api= ChuckNorrisRestAPI.getChuckNorrisRestAPI();
             Call<JokeWrapper> call=api.GetSingleJoke();

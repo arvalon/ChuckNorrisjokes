@@ -13,6 +13,7 @@ import ru.arvalon.chucknorrisjokes.mvp.model.JokeList;
 import ru.arvalon.chucknorrisjokes.mvp.views.AllJokesView;
 import ru.arvalon.chucknorrisjokes.rest.ChuckNorrisAPI;
 import ru.arvalon.chucknorrisjokes.rest.ChuckNorrisRestAPI;
+import ru.arvalon.chucknorrisjokes.vk.App;
 
 /**
  * Created by arvalon on 02.11.2016.
@@ -52,7 +53,7 @@ public class AllJokesPresenter extends MvpPresenter<AllJokesView> {
                         }
 
                         getViewState().ShowJokes(response.body());
-                        Log.d("happy","onResponse end");
+                        Log.d(App.TAG,"onResponse end");
                     }
 
                     @Override

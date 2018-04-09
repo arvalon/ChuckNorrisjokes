@@ -1,9 +1,7 @@
 package ru.arvalon.chucknorrisjokes.ui.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +31,7 @@ import ru.arvalon.chucknorrisjokes.R;
 import ru.arvalon.chucknorrisjokes.mvp.presenter.JokePresenterImpl;
 import ru.arvalon.chucknorrisjokes.mvp.views.JokeView;
 import ru.arvalon.chucknorrisjokes.ui.dialogs.JokePostSuccessDialog;
+import ru.arvalon.chucknorrisjokes.vk.App;
 
 
 public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokePostSuccessDialog.DialogHost {
@@ -54,14 +53,14 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokeP
         setContentView(R.layout.activity_joke);
         ButterKnife.bind(this);
 
-        Log.d("happy","myJokePresenter.randomViewMode: "+myJokePresenter.randomViewMode);
+        Log.d(App.TAG,"myJokePresenter.randomViewMode: "+myJokePresenter.randomViewMode);
 
         Intent intent=getIntent();
-        Log.d("happy","JokeActivity onCreate");
+        Log.d(App.TAG,"JokeActivity onCreate");
         if(intent.hasExtra(joke)){
-                Log.d("happy","intent.hasExtra(joke)");
+                Log.d(App.TAG,"intent.hasExtra(joke)");
                 if (intent.getStringExtra(joke).length()!=0){
-                    Log.d("happy","intent.getStringExtra(joke).length()!=0");
+                    Log.d(App.TAG,"intent.getStringExtra(joke).length()!=0");
                     setJoke(intent.getStringExtra(joke));
                     myJokePresenter.isJokeSet=true;
                     myJokePresenter.randomViewMode=false;
@@ -79,7 +78,7 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokeP
     @Override
     public void setJoke(String jokeText) {
         textView.setText(jokeText);
-        Log.d("happy","JokeActivity setJoke");
+        Log.d(App.TAG,"JokeActivity setJoke");
         jokeLoadProgressBar.setVisibility(View.GONE);
     }
 
@@ -98,12 +97,12 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokeP
     @OnClick(R.id.postToVkButton)
     public void PostButton() {
         if (VKAccessToken.tokenFromSharedPreferences(this,VK_ACCESS_TOKEN)==null){
-            Log.d("happy","Token from shared == null");
+            Log.d(App.TAG,"Token from shared == null");
             vkAuthorize();
             //PostJoke(VKAccessToken.tokenFromSharedPreferences(this,VK_ACCESS_TOKEN));
             // TODO: 12.11.2016 call PostJoke with token
         }else if(VKAccessToken.tokenFromSharedPreferences(this,VK_ACCESS_TOKEN)!=null){
-            Log.d("happy","Token from shared != null");
+            Log.d(App.TAG,"Token from shared != null");
             PostJoke(VKAccessToken.tokenFromSharedPreferences(this,VK_ACCESS_TOKEN));
         }
 
@@ -114,13 +113,13 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokeP
         parameters.put(VKApiConst.OWNER_ID, token.userId);
         parameters.put(VKApiConst.MESSAGE, textView.getText().toString());
         VKRequest post = VKApi.wall().post(parameters);
-        Log.d("happy","Joke to post: "+textView.getText().toString());
+        Log.d(App.TAG,"Joke to post: "+textView.getText().toString());
         post.setModelClass(VKWallPostResult.class);
         post.executeWithListener(new VKRequest.VKRequestListener() {
             @Override
             public void onComplete(VKResponse response) {
                 Toast.makeText(getApplicationContext(),"Шутка добавлена",Toast.LENGTH_LONG).show();
-                Log.d("happy","response: "+response.toString());
+                Log.d(App.TAG,"response: "+response.toString());
                 ShowFinalDialog();
             }
             @Override
@@ -135,14 +134,14 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokeP
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
-                Log.d("happy","Получили токен onActivityResult TOKEN: "+res.accessToken+", TOKEN expiresIn: "+res.expiresIn);
+                Log.d(App.TAG,"Получили токен onActivityResult TOKEN: "+res.accessToken+", TOKEN expiresIn: "+res.expiresIn);
                 res.saveTokenToSharedPreferences(getApplicationContext(),VK_ACCESS_TOKEN);
                 PostJoke(res);
             }
             @Override
             public void onError(VKError error) {
 
-                Log.d("happy","onActivityResult error не смогли получить токен");
+                Log.d(App.TAG,"onActivityResult error не смогли получить токен");
             }
         })) {
             super.onActivityResult(requestCode, resultCode, data);
@@ -151,7 +150,7 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokeP
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.d("happy","onCreateOptionsMenu/myJokePresenter.randomViewMode: "+myJokePresenter.randomViewMode);
+        Log.d(App.TAG,"onCreateOptionsMenu/myJokePresenter.randomViewMode: "+myJokePresenter.randomViewMode);
         getMenuInflater().inflate(R.menu.joke_actionbar_menu,menu);
         menu.setGroupVisible(R.id.group_visible1,myJokePresenter.randomViewMode);
         return true;
@@ -182,7 +181,7 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokeP
 
     @Override
     public void DialogGotoMainMenu() {
-        Log.d("happy","NegativeButton");
+        Log.d(App.TAG,"NegativeButton");
         startActivity(new Intent(this,MainActivity.class));
     }
 }

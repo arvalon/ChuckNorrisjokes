@@ -2,11 +2,9 @@ package ru.arvalon.chucknorrisjokes.ui.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,6 +18,7 @@ import butterknife.OnClick;
 import ru.arvalon.chucknorrisjokes.R;
 import ru.arvalon.chucknorrisjokes.mvp.presenter.UserNamePresenterImpl;
 import ru.arvalon.chucknorrisjokes.mvp.views.UserNameView;
+import ru.arvalon.chucknorrisjokes.vk.App;
 
 public class UserNameActivity extends MvpAppCompatActivity implements UserNameView {
 
@@ -78,7 +77,7 @@ public class UserNameActivity extends MvpAppCompatActivity implements UserNameVi
     @Override
     public void setUserName() {
         if(sPrefs.contains(sharedFirstName)&&sPrefs.contains(sharedLastName)){
-            Log.d("happy","Get from SharedPreferences firsnname: "
+            Log.d(App.TAG,"Get from SharedPreferences firsnname: "
                     +sPrefs.getString(sharedFirstName,"")
                     +", lastname: "
                     +sPrefs.getString(sharedLastName,""));
@@ -98,7 +97,7 @@ public class UserNameActivity extends MvpAppCompatActivity implements UserNameVi
 
     @Override
     public void showJoke(String jokeText) {
-        Log.d("happy","UserNameActivity showJoke");
+        Log.d(App.TAG,"UserNameActivity showJoke");
         loadCustomJokeProgressBar.setVisibility(View.GONE);
         Intent i=new Intent(this,JokeActivity.class);
         i.putExtra(JOKE,jokeText);
