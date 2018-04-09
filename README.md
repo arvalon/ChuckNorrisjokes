@@ -1,6 +1,6 @@
 # ChuckNorrisjokes
 Пост шуток про Чака Норриса себе на стену во вконтакте<br>
-Используемые библиотеки и технологии:<br>
+Используются:<br>
 Moxy MVP<br>
 ButterKnife<br>
 Retrolambda<br>
