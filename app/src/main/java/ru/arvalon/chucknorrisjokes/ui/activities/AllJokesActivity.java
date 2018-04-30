@@ -84,6 +84,7 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
                     getApplicationContext(),
                     recyclerView,
                     new RecyclerTouchListener.ClickListener() {
+
                         @Override
                         public void onClick(View view, int position) {
                             Log.d(App.TAG,"new RecyclerTouchListener.ClickListener() onClick");
