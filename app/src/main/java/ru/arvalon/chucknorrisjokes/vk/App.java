@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 /**
  * Created by arvalon on 10.11.2016.
+ * This line added in flash copy
+ * And this line added in origin place
  */
 
 public class App extends Application {
