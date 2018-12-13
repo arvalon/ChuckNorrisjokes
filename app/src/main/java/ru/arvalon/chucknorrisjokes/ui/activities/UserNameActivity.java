@@ -20,6 +20,9 @@ import ru.arvalon.chucknorrisjokes.mvp.presenter.UserNamePresenterImpl;
 import ru.arvalon.chucknorrisjokes.mvp.views.UserNameView;
 import ru.arvalon.chucknorrisjokes.vk.App;
 
+/**
+ * Активность редактирования имени/фамилии пользователя
+ */
 public class UserNameActivity extends MvpAppCompatActivity implements UserNameView {
 
     @BindView(R.id.firstName)EditText firstName;
