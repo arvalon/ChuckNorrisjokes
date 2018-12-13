@@ -18,6 +18,9 @@ import ru.arvalon.chucknorrisjokes.R;
 import ru.arvalon.chucknorrisjokes.mvp.presenter.MainActivityPresenter;
 import ru.arvalon.chucknorrisjokes.mvp.views.MainActivityView;
 
+/**
+ * Главная активность
+ */
 public class MainActivity extends MvpAppCompatActivity implements MainActivityView{
 
     @InjectPresenter
