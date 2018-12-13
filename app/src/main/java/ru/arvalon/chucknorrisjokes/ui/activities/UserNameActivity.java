@@ -22,6 +22,7 @@ import ru.arvalon.chucknorrisjokes.vk.App;
 
 /**
  * Активность редактирования имени/фамилии пользователя
+ * master edit
  */
 public class UserNameActivity extends MvpAppCompatActivity implements UserNameView {
 
