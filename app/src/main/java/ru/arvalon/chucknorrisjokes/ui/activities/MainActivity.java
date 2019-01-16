@@ -19,7 +19,7 @@ import ru.arvalon.chucknorrisjokes.mvp.presenter.MainActivityPresenter;
 import ru.arvalon.chucknorrisjokes.mvp.views.MainActivityView;
 
 /**
- * Главная активность
+ * Main Activity. Add in develop branch
  */
 public class MainActivity extends MvpAppCompatActivity implements MainActivityView{
 
