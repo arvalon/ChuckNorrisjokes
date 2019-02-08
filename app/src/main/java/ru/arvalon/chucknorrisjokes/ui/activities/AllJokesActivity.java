@@ -57,7 +57,7 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
     @Override
     public void ShowError() {
         jokeLoadProgressBar.setVisibility(View.GONE);
-        jokesCount.setText("ГРОБ ГРОБ КЛОДБИЩЕ ПИДОР");
+        jokesCount.setText("REST ERROR");
     }
 
 
