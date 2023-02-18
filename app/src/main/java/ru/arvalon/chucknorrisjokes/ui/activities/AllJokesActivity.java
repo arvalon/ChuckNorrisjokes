@@ -2,24 +2,24 @@ package ru.arvalon.chucknorrisjokes.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import moxy.MvpAppCompatActivity;
+import moxy.presenter.InjectPresenter;
 import ru.arvalon.chucknorrisjokes.R;
 import ru.arvalon.chucknorrisjokes.mvp.model.Joke;
 import ru.arvalon.chucknorrisjokes.mvp.model.JokeList;
@@ -35,7 +35,8 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
     AllJokesPresenter allJokesPresenter;
 
     @BindView(R.id.jokesCount)TextView jokesCount;
-    @BindView(R.id.jokesRecyclerView)RecyclerView recyclerView;
+    @BindView(R.id.jokesRecyclerView)
+    RecyclerView recyclerView;
     @BindView(R.id.jokeLoadProgressBar)ProgressBar jokeLoadProgressBar;
 
     private JokesAdapter jokesAdapter;

@@ -2,9 +2,8 @@ package ru.arvalon.chucknorrisjokes.mvp.presenter;
 
 import android.util.Log;
 
-import com.arellomobile.mvp.InjectViewState;
-import com.arellomobile.mvp.MvpPresenter;
-
+import moxy.InjectViewState;
+import moxy.MvpPresenter;
 import ru.arvalon.chucknorrisjokes.mvp.views.MainActivityView;
 import ru.arvalon.chucknorrisjokes.vk.App;
 

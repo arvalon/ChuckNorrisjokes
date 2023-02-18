@@ -1,11 +1,7 @@
 package ru.arvalon.chucknorrisjokes.mvp.presenter;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-
-import com.arellomobile.mvp.InjectViewState;
-import com.arellomobile.mvp.MvpPresenter;
-
+import moxy.InjectViewState;
+import moxy.MvpPresenter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

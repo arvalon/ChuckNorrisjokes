@@ -1,10 +1,8 @@
 package ru.arvalon.chucknorrisjokes.mvp.views;
 
-import com.arellomobile.mvp.MvpView;
-import com.arellomobile.mvp.viewstate.strategy.SingleStateStrategy;
-import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
-
+import moxy.MvpView;
+import moxy.viewstate.strategy.AddToEndSingleStrategy;
+import moxy.viewstate.strategy.StateStrategyType;
 import ru.arvalon.chucknorrisjokes.mvp.model.JokeList;
 
 /**
@@ -12,9 +10,13 @@ import ru.arvalon.chucknorrisjokes.mvp.model.JokeList;
  */
 
 public interface AllJokesView extends MvpView {
-    void ShowProgress();
-    void ShowError();
-    void ShowJokes(JokeList jokeList);
-    void RefreshJokes();
-    void PickUpJoke();
+    @StateStrategyType(AddToEndSingleStrategy.class) void ShowProgress();
+
+    @StateStrategyType(AddToEndSingleStrategy.class) void ShowError();
+
+    @StateStrategyType(AddToEndSingleStrategy.class) void ShowJokes(JokeList jokeList);
+
+    @StateStrategyType(AddToEndSingleStrategy.class) void RefreshJokes();
+
+    @StateStrategyType(AddToEndSingleStrategy.class) void PickUpJoke();
 }

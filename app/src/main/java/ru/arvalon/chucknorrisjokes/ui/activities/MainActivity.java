@@ -2,21 +2,17 @@ package ru.arvalon.chucknorrisjokes.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-
-import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.vk.sdk.util.VKUtil;
-
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import moxy.MvpAppCompatActivity;
+import moxy.presenter.InjectPresenter;
 import ru.arvalon.chucknorrisjokes.R;
 import ru.arvalon.chucknorrisjokes.mvp.presenter.MainActivityPresenter;
 import ru.arvalon.chucknorrisjokes.mvp.views.MainActivityView;
+
 
 /**
  * Main Activity. Add in develop branch.

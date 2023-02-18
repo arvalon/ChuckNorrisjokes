@@ -1,14 +1,14 @@
 package ru.arvalon.chucknorrisjokes.mvp.views;
 
-import com.arellomobile.mvp.MvpView;
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
+import moxy.MvpView;
+import moxy.viewstate.strategy.AddToEndSingleStrategy;
+import moxy.viewstate.strategy.StateStrategyType;
 
 /**
  * Created by arvalon on 02.11.2016.
  */
-
 public interface MainActivityView extends MvpView {
-    void ShowAllJokes();
-    void ShowRandomJoke();
-    void ShowCustomJoke();
+    @StateStrategyType(AddToEndSingleStrategy.class)void ShowAllJokes();
+    @StateStrategyType(AddToEndSingleStrategy.class)void ShowRandomJoke();
+    @StateStrategyType(AddToEndSingleStrategy.class)void ShowCustomJoke();
 }
