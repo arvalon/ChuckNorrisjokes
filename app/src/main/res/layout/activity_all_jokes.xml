@@ -38,6 +38,7 @@
         android:visibility="gone"/>
 
     <Button
+        android:onClick="RefreshJokes"
         android:layout_alignParentBottom="true"
         android:id="@+id/refreshJokesButton"
         android:text="Обновить"

@@ -22,9 +22,6 @@ import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 import com.vk.sdk.api.model.VKWallPostResult;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import moxy.MvpAppCompatActivity;
 import moxy.presenter.InjectPresenter;
 import ru.arvalon.chucknorrisjokes.R;
@@ -44,14 +41,16 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokeP
     @InjectPresenter
     JokePresenterImpl myJokePresenter;
 
-    @BindView(R.id.jokeText)TextView textView;
-    @BindView(R.id.jokeLoadProgressBar)ProgressBar jokeLoadProgressBar;
+    TextView textView;
+    ProgressBar jokeLoadProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joke);
-        ButterKnife.bind(this);
+
+        textView = findViewById(R.id.jokeText);
+        jokeLoadProgressBar = findViewById(R.id.jokeLoadProgressBar);
 
         Log.d(App.TAG,"myJokePresenter.randomViewMode: "+myJokePresenter.randomViewMode);
 
@@ -94,7 +93,6 @@ public class JokeActivity extends MvpAppCompatActivity implements JokeView,JokeP
     }
 
     @Override
-    @OnClick(R.id.postToVkButton)
     public void PostButton() {
         if (VKAccessToken.tokenFromSharedPreferences(this,VK_ACCESS_TOKEN)==null){
             Log.d(App.TAG,"Token from shared == null");

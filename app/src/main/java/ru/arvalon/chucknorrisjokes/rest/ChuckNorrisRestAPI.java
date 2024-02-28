@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChuckNorrisRestAPI {
     public static ChuckNorrisAPI getChuckNorrisRestAPI(){
-        String url="http://api.icndb.com/jokes/";
+        String url="https://api.chucknorris.io/jokes/";
 
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(url)

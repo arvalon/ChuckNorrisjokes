@@ -9,9 +9,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import moxy.MvpAppCompatActivity;
 import moxy.presenter.InjectPresenter;
 import ru.arvalon.chucknorrisjokes.R;
@@ -26,10 +23,10 @@ import ru.arvalon.chucknorrisjokes.vk.App;
  */
 public class UserNameActivity extends MvpAppCompatActivity implements UserNameView {
 
-    @BindView(R.id.firstName)EditText firstName;
-    @BindView(R.id.lastName)EditText lastName;
-    @BindView(R.id.customJokeLoadProgressBar)ProgressBar loadCustomJokeProgressBar;
-    @BindView(R.id.connectionErrorMessage)TextView connectionErorMessage;
+    EditText firstName;
+    EditText lastName;
+    ProgressBar loadCustomJokeProgressBar;
+    TextView connectionErorMessage;
 
     @InjectPresenter
     UserNamePresenterImpl userNamePresenter;
@@ -46,12 +43,16 @@ public class UserNameActivity extends MvpAppCompatActivity implements UserNameVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_name);
-        ButterKnife.bind(this);
+
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+        loadCustomJokeProgressBar = findViewById(R.id.customJokeLoadProgressBar);
+        connectionErorMessage = findViewById(R.id.connectionErrorMessage);
+
         sPrefs=getPreferences(getApplicationContext().MODE_PRIVATE);
     }
 
     @Override
-    @OnClick(R.id.getCustomJokeButton)
     public void getJoke() {
         connectionErorMessage.setVisibility(View.GONE);
         userNamePresenter.validateUserName(firstName.getText().toString(),lastName.getText().toString());

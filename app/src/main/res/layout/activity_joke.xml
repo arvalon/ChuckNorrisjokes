@@ -30,6 +30,7 @@
         android:visibility="gone"/>
 
     <Button
+        android:onClick="PostButton"
         android:id="@+id/postToVkButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

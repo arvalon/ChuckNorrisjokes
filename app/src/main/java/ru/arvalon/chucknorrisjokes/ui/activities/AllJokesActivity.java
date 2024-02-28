@@ -15,9 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Collections;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import moxy.MvpAppCompatActivity;
 import moxy.presenter.InjectPresenter;
 import ru.arvalon.chucknorrisjokes.R;
@@ -34,10 +31,9 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
     @InjectPresenter
     AllJokesPresenter allJokesPresenter;
 
-    @BindView(R.id.jokesCount)TextView jokesCount;
-    @BindView(R.id.jokesRecyclerView)
+    TextView jokesCount;
     RecyclerView recyclerView;
-    @BindView(R.id.jokeLoadProgressBar)ProgressBar jokeLoadProgressBar;
+    ProgressBar jokeLoadProgressBar;
 
     private JokesAdapter jokesAdapter;
     private boolean isListenerCreated=false;
@@ -47,7 +43,10 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_all_jokes);
-        ButterKnife.bind(this);
+
+        jokesCount = findViewById(R.id.jokesCount);
+        recyclerView = findViewById(R.id.jokesRecyclerView);
+        jokeLoadProgressBar = findViewById(R.id.jokeLoadProgressBar);
     }
 
     @Override
@@ -109,7 +108,6 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
         }
     }
 
-    @OnClick(R.id.refreshJokesButton)
     public void RefreshJokes() {
 
         allJokesPresenter.getJokes();

@@ -40,11 +40,7 @@ dependencies {
     implementation "com.github.moxy-community:moxy-androidx:2.2.2"
     annotationProcessor "com.github.moxy-community:moxy-compiler:2.2.2"
 
-
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-
-    implementation 'com.jakewharton:butterknife:10.2.3'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
     implementation 'com.vk:androidsdk:1.6.7'
 

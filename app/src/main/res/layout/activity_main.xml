@@ -23,6 +23,7 @@
         android:id="@+id/allJokesButton"/>
 
     <Button
+        android:onClick="ShowRandomJoke"
         android:textAlignment="center"
         android:gravity="center_vertical"
         android:layout_width="match_parent"
@@ -31,6 +32,7 @@
         android:id="@+id/randomJokeButton"/>
 
     <Button
+        android:onClick="ShowCustomJoke"
         android:textAlignment="center"
         android:gravity="center_vertical"
         android:layout_width="match_parent"

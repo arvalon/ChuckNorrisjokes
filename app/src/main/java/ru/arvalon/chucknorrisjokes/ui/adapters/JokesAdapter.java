@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import ru.arvalon.chucknorrisjokes.R;
 import ru.arvalon.chucknorrisjokes.mvp.model.Joke;
 import ru.arvalon.chucknorrisjokes.mvp.model.JokeList;
@@ -45,12 +43,13 @@ public class JokesAdapter extends RecyclerView.Adapter<JokesAdapter.JokeHolder> 
     }
 
     public class JokeHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.jokeId)TextView id;
-        @BindView(R.id.jokeText)TextView jokeText;
+        TextView id;
+        TextView jokeText;
 
         public JokeHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            id = itemView.findViewById(R.id.jokeId);
+            jokeText = itemView.findViewById(R.id.jokeText);
         }
     }
 }
