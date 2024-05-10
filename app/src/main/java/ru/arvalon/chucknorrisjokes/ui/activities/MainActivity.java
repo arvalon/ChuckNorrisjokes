@@ -2,6 +2,7 @@ package ru.arvalon.chucknorrisjokes.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import moxy.MvpAppCompatActivity;
@@ -38,11 +39,18 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
         mainActivityPresenter.AllJokes();
     }
 
+    public void ShowRandomJoke(View view) {
+        ShowRandomJoke();
+    }
+
     @Override
     public void ShowRandomJoke() {
         startActivity(new Intent(this,JokeActivity.class));
     }
 
+    public void ShowCustomJoke(View view) {
+        ShowCustomJoke();
+    }
     @Override
     public void ShowCustomJoke() {
         startActivity(new Intent(this,UserNameActivity.class));

@@ -9,7 +9,7 @@ android {
         applicationId "ru.arvalon.chucknorrisjokes"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 9
+        versionCode 10
         versionName "5.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
@@ -43,8 +43,4 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     implementation 'com.vk:androidsdk:1.6.7'
-
-    // Отслеживание утечек памяти
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:2.10'
 }
