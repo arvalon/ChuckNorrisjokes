@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import moxy.MvpAppCompatActivity;
 import moxy.presenter.InjectPresenter;
@@ -31,7 +33,7 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
     @InjectPresenter
     AllJokesPresenter allJokesPresenter;
 
-    TextView jokesCount;
+    //TextView jokesCount;
     RecyclerView recyclerView;
     ProgressBar jokeLoadProgressBar;
 
@@ -44,9 +46,30 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
         getSupportActionBar().hide();
         setContentView(R.layout.activity_all_jokes);
 
-        jokesCount = findViewById(R.id.jokesCount);
+        //jokesCount = findViewById(R.id.jokesCount);
         recyclerView = findViewById(R.id.jokesRecyclerView);
         jokeLoadProgressBar = findViewById(R.id.jokeLoadProgressBar);
+
+        String[] rowList = getResources().getStringArray(R.array.alljokes);
+
+        List<Joke> rowJokeList = new ArrayList<>();
+
+        for (int i=0; i < rowList.length; i++){
+            rowJokeList.add(new Joke(i,rowList[i]));
+        }
+
+        JokeList jokeList = new JokeList(null, rowJokeList);
+
+        jokesAdapter=new JokesAdapter(jokeList);
+
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        DividerItemDecoration jokeListDecorator = new DividerItemDecoration(recyclerView.getContext(), 1);
+        recyclerView.addItemDecoration(jokeListDecorator);
+
+        recyclerView.setAdapter(jokesAdapter);
     }
 
     @Override
@@ -57,16 +80,17 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
     @Override
     public void ShowError() {
         jokeLoadProgressBar.setVisibility(View.GONE);
-        jokesCount.setText("REST ERROR");
+        //jokesCount.setText("REST ERROR");
     }
 
 
     @Override
     public void ShowJokes(JokeList jokeList) {
         jokeLoadProgressBar.setVisibility(View.GONE);
-        jokesCount.setText(String.valueOf(jokeList.getValue().size()));
 
-        Collections.sort(jokeList.getValue(),(joke1,joke2)->joke1.getId()-joke2.getId());
+        //jokesCount.setText(String.valueOf(jokeList.getValue().size()));
+
+        /*Collections.sort(jokeList.getValue(),(joke1,joke2)->joke1.getId()-joke2.getId());
 
         jokesAdapter=new JokesAdapter(jokeList);
 
@@ -105,7 +129,7 @@ public class AllJokesActivity extends MvpAppCompatActivity implements AllJokesVi
 
             Log.d(App.TAG,"Listener is created");
             isListenerCreated=true;
-        }
+        }*/
     }
 
     public void RefreshJokes() {

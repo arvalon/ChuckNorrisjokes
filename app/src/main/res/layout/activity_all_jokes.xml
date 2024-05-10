@@ -13,42 +13,15 @@
     android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
     tools:context="ru.arvalon.chucknorrisjokes.ui.AllJokesActivity">
 
-    <LinearLayout
-        android:id="@+id/top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:text="Общее количество шуток: "
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/jokesCount"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-    <ProgressBar
-        android:layout_marginTop="80dp"
-        android:id="@+id/jokeLoadProgressBar"
+    <ImageView
+        android:id="@+id/ChuckNorrisWideLogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
-
-    <Button
-        android:onClick="RefreshJokes"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/refreshJokesButton"
-        android:text="Обновить"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:src="@drawable/chuck_norris_logo"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/jokesRecyclerView"
-        android:layout_below="@id/top"
-        android:layout_above="@id/refreshJokesButton"
+        android:layout_below="@id/ChuckNorrisWideLogo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical">

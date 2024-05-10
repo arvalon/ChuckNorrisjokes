@@ -15,6 +15,12 @@ public class Joke {
         this.categories = categories;
     }
 
+    public Joke(int id, String joke) {
+        this.id = id;
+        this.joke = joke;
+        this.categories = null;
+    }
+
     public int getId() {
         return id;
     }

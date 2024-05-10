@@ -32,7 +32,7 @@ public class AllJokesPresenter extends MvpPresenter<AllJokesView> {
 
     public void getJokes(){
 
-        getViewState().ShowProgress();
+        //getViewState().ShowProgress();
 
         ChuckNorrisAPI api= ChuckNorrisRestAPI.getChuckNorrisRestAPI();
         Call<Count> call = api.GetJokesCount();
