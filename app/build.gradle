@@ -1,3 +1,6 @@
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 apply plugin: 'com.android.application'
 
 android {
@@ -7,17 +10,20 @@ android {
     defaultConfig {
         applicationId "ru.arvalon.chucknorrisjokes"
         minSdkVersion 21
-        compileSdk 35
-        targetSdkVersion 35
-        versionCode 13
-        versionName "5.3"
+        compileSdk 36
+        targetSdkVersion 36
+        versionCode 14
+        versionName "5.4"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        String finalName = "ChuckNorrisJokes_v." + defaultConfig.versionName+"_"+getDateTime()
+        setProperty("archivesBaseName", finalName);
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -27,6 +33,12 @@ android {
     }
 
     namespace 'ru.arvalon.chucknorrisjokes'
+}
+
+def getDateTime() {
+    DateFormat df = new SimpleDateFormat("MM.dd_HH.mm");
+
+    return df.format(new Date());
 }
 
 dependencies {
